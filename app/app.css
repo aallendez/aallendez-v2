@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html,
+body {
+  @apply bg-white dark:bg-gray-900;
+  transition: background-color 0.3s ease;
+}
+
+/* This targets the scrollbar track (the background) */
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Makes the track background transparent */
+}
+
+/* This targets the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1); /* Dark handle for contrast */
+  border-radius: 4px; /* Optional: Rounds the corners of the scrollbar handle */
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2); /* Light handle for dark mode */
+}
+
+/* This targets the scrollbar itself (the whole scrollbar container) */
+::-webkit-scrollbar {
+  width: 8px; /* Adjusts the width of the vertical scrollbar */
+  height: 8px; /* Adjusts the height of the horizontal scrollbar */
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
