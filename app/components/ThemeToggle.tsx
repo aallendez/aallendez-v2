@@ -9,11 +9,13 @@ export function ThemeToggle() {
     const savedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     
-    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
-      setIsDark(true);
+    const shouldBeDark = savedTheme === "dark" || (!savedTheme && systemPrefersDark);
+    setIsDark(shouldBeDark);
+    
+    // Apply the theme immediately
+    if (shouldBeDark) {
       document.documentElement.classList.add("dark");
     } else {
-      setIsDark(false);
       document.documentElement.classList.remove("dark");
     }
   }, []);
@@ -34,7 +36,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 p-3 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200"
+      className="fixed top-4 right-4 p-3 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200 z-50"
       aria-label="Toggle theme"
     >
       {isDark ? (

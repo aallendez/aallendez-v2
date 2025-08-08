@@ -3,12 +3,33 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  --animate-bounce-down: bounce-down 2s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@keyframes scale-down {
+  0% { transform: scale(1); }
+  100% { transform: scale(0.98); }
 }
 
 html,
 body {
   @apply bg-white dark:bg-gray-900;
   transition: background-color 0.3s ease;
+}
+
+/* Ensure dark mode is properly applied to the root */
+html.dark {
+  @apply bg-gray-900;
+}
+
+html.dark body {
+  @apply bg-gray-900;
 }
 
 /* This targets the scrollbar track (the background) */
@@ -36,4 +57,13 @@ body {
 /* Smooth transitions for theme changes */
 * {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Profile picture hover scale effect */
+.pfp-hover-scale {
+  transition: transform 0.1s ease-in-out;
+}
+
+.pfp-hover-scale:hover {
+  transform: scale(0.98);
 }
