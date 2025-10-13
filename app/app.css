@@ -17,6 +17,30 @@
   100% { transform: scale(0.98); }
 }
 
+@keyframes levitate {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-8px) rotate(1deg); 
+  }
+  50% { 
+    transform: translateY(-4px) rotate(-0.5deg); 
+  }
+  75% { 
+    transform: translateY(-12px) rotate(0.5deg); 
+  }
+}
+
+@keyframes levitate-gentle {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-6px); 
+  }
+}
+
 html,
 body {
   @apply bg-white dark:bg-gray-900;
@@ -66,4 +90,43 @@ html.dark body {
 
 .pfp-hover-scale:hover {
   transform: scale(0.98);
+}
+
+/* Levitation animations */
+.levitate {
+  animation: levitate-gentle 3s ease-in-out infinite;
+}
+
+.levitate-gentle {
+  animation: levitate-gentle 10s ease-in-out infinite;
+}
+
+/* Subtle floating for radial buttons - only when menu is open */
+.radial-item {
+  animation: none;
+}
+
+.radial-item.levitate-active {
+  animation: levitate-gentle 2.5s ease-in-out infinite;
+}
+
+/* Staggered levitation for multiple elements */
+.levitate-delay-1 {
+  animation: levitate-gentle 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.levitate-delay-2 {
+  animation: levitate-gentle 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.levitate-delay-3 {
+  animation: levitate-gentle 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.levitate-delay-4 {
+  animation: levitate-gentle 3s ease-in-out infinite;
+  animation-delay: 2s;
 }

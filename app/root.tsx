@@ -48,7 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>
+      <body className="cursor-default">
         {children}
         <ScrollRestoration />
         <Scripts />

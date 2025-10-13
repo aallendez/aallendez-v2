@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, X } from "lucide-react";
 
 export interface SocialLink {
   name: string;
@@ -31,8 +31,13 @@ export interface Project {
     active: boolean;
 }
 
+export interface MenuItem {
+    key: string;
+    label: string;
+}
+
 export const homeData: HomeData = {
-  name: "Juan Alonso Allende",
+  name: "Juan Alonso-Allende",
   bio: "Software & Product Engineer",
   profilePicture: "/app/assets/pfp.png",
   location: "Madrid, Spain",
@@ -56,12 +61,12 @@ export const homeData: HomeData = {
       icon: Twitter,
       color: "hover:text-black dark:hover:text-white"
     },
-    {
-      name: "Instagram",
-      url: "https://instagram.com/juan_aaz",
-      icon: Instagram,
-      color: "hover:text-pink-600 dark:hover:text-pink-400"
-    }
+    // {
+    //   name: "Instagram",
+    //   url: "https://instagram.com/juan_aaz",
+    //   icon: Instagram,
+    //   color: "hover:text-pink-600 dark:hover:text-pink-400"
+    // }
   ]
 }; 
 
@@ -69,3 +74,10 @@ export const projectPage: ProjectPage = {
     title: "Projects",
     description: "A collection of my projects and work"
 };
+
+export const menuItems: MenuItem[] = [
+    { key: 'about', label: 'About me' },
+    { key: 'projects', label: 'Projects' },
+    { key: 'contact', label: 'Contact' },
+    { key: 'socials', label: 'Socials' },
+];

@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { homeData } from "~/data";
+import { homeData, menuItems } from "~/data";
 import {Tooltip} from "@heroui/tooltip";
 import { ArrowDown } from "lucide-react";
 import { animate, onScroll, createScope, createSpring, createDraggable, Scope } from 'animejs';
 
 export default function Home() {
     const root = useRef<HTMLDivElement>(null);
+    const profileContainerRef = useRef<HTMLDivElement>(null);
     const scope = useRef<Scope | null>(null);
     const cleanupRef = useRef<(() => void) | null>(null);
     const [ rotations, setRotations ] = useState(0);
+    const [ menuOpen, setMenuOpen ] = useState(false);
+    
     
     // useEffect(() => {
     //     scope.current = anime.createScope({ root }).add(self => {
@@ -85,6 +88,8 @@ export default function Home() {
                 ],
                 loop: false,
               });
+              // Also toggle radial menu state
+              setMenuOpen(prev => !prev);
             };
             
             profilePicElement.addEventListener('click', handleProfilePicClick);
@@ -177,16 +182,105 @@ export default function Home() {
     
       }, []);
 
+    // Animate radial menu open/close on state change
+    useEffect(() => {
+        const container = profileContainerRef.current;
+        if (!container) return;
+
+        const items = Array.from(container.querySelectorAll('.radial-item')) as HTMLElement[];
+        if (items.length === 0) return;
+
+        const xRadius = 600; // horizontal spread in px (slightly expanded)
+        const yRadius = 220; // vertical spread in px (reduced to avoid going out of frame)
+        const total = items.length;
+
+        if (menuOpen) {
+            // Distribute items only on the left and right arcs, avoiding top/bottom
+            const rightCount = Math.ceil(total / 2);
+            const leftCount = total - rightCount;
+
+            // Right side: angles from -60° to 60° (in radians: [-π/3, π/3])
+            const rightAngles = Array.from({ length: rightCount }, (_, i) => {
+                const t = rightCount === 1 ? 0.5 : i / (rightCount - 1);
+                return -Math.PI / 3 + t * (2 * Math.PI / 3);
+            });
+
+            // Left side: angles from 120° to 240° (in radians: [2π/3, 4π/3])
+            const leftAngles = Array.from({ length: leftCount }, (_, i) => {
+                const t = leftCount === 1 ? 0.5 : i / (leftCount - 1);
+                return (2 * Math.PI / 3) + t * (2 * Math.PI / 3);
+            });
+
+            const angles = [...rightAngles, ...leftAngles];
+
+            items.forEach((item, index) => {
+                const angle = angles[index] ?? 0;
+                const x = Math.cos(angle) * xRadius;
+                const y = Math.sin(angle) * yRadius;
+
+                animate(item, {
+                    x,
+                    y,
+                    opacity: [0, 1],
+                    scale: [0.6, 1],
+                    ease: 'out(3)',
+                    duration: 450,
+                    delay: index * 50,
+                });
+
+                // Add subtle levitation animation after the initial positioning
+                setTimeout(() => {
+                    animate(item, {
+                        y: [y, y - 8, y - 4, y - 12, y],
+                        rotate: [0, 1, -0.5, 0.5, 0],
+                        ease: 'inOut(2)',
+                        duration: 10000,
+                        loop: true,
+                        delay: index * 800,
+                    });
+                }, 500 + (index * 50)); // Start after initial animation completes
+            });
+        } else {
+            items.forEach((item, index) => {
+                animate(item, {
+                    x: 0,
+                    y: 0,
+                    opacity: [1, 0],
+                    scale: [1, 0.6],
+                    ease: 'in(3)',
+                    duration: 300,
+                    delay: index * 25,
+                });
+            });
+        }
+    }, [menuOpen]);
+
+    // Close menu on outside click or Escape
+    useEffect(() => {
+        const onDocClick = (e: MouseEvent) => {
+            if (!menuOpen) return;
+            const target = e.target as Node;
+            if (profileContainerRef.current && !profileContainerRef.current.contains(target)) {
+                setMenuOpen(false);
+            }
+        };
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setMenuOpen(false);
+        };
+        document.addEventListener('click', onDocClick);
+        document.addEventListener('keydown', onKey);
+        return () => {
+            document.removeEventListener('click', onDocClick);
+            document.removeEventListener('keydown', onKey);
+        };
+    }, [menuOpen]);
+
     return (
-        <div ref={root} className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center px-4 relative overflow-y-auto">
-            {/* Virtual scroll container for animations */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="h-[200vh] w-full"></div>
-            </div>
+        <div ref={root} className="min-h-screen dark:text-white w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center px-4 relative overflow-y-auto">
             
-            <div className="fixed w-64 text-center mx-auto z-10">
+            <div className="fixed text-center mx-auto z-10">
                 {/* Profile Picture */}
-                <div id="profile" className="w-full cursor-pointer space-y-3">
+                <div id="profile" className="w-full space-y-4">
                     {/* Profile Picture arrow */}
                     <div className="flex flex-col items-center justify-center w-full">
                         Press below!
@@ -195,18 +289,47 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <img
-                        src={homeData.profilePicture}
-                        alt="Profile Picture"
-                        className="w-48 h-48 rounded-full mx-auto shadow-lg object-cover pfp-hover-scale profilePic logo"
-                    />
+                    <div ref={profileContainerRef} className="relative w-48 h-48 mx-auto">
+                        {/* Radial menu items (initially centered; animated outward) */}
+                        <div className="pointer-events-none absolute inset-0">
+                            <div className="relative w-full h-full">
+                                {menuItems.map((item, index) => (
+                                    <button
+                                        key={item.key}
+                                        className={`cursor-pointer hover:shadow-md transition-all duration-300 radial-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur px-3 py-1 text-sm text-gray-900 dark:text-gray-100 shadow-sm border border-black/5 dark:border-white/5 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            // Placeholder actions by label
+                                            setMenuOpen(false);
+                                        }}
+                                        aria-label={item.label}
+                                    >
+                                        {item.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <img
+                            src={homeData.profilePicture}
+                            alt="Profile Picture"
+                            className="w-48 h-48 rounded-full mx-auto shadow-lg object-cover pfp-hover-scale profilePic logo relative z-10"
+                        />
+                    </div>
 
                     {/* Name & Bio */}
                     <div className="">
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                        <h1 className="text-3xl font-bold mb-4">
                         {homeData.name}
                         </h1>
-                        <p className="text-md text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                        <div className="flex items-center justify-center gap-6 cursor-pointer">
+                          {homeData.socialLinks.map((link, index) => (
+                            <div key={link.name} className={`${link.color}  transition-all duration-300 flex items-center justify-center `} style={{ animationDelay: `${index * 0.5}s` }}>
+                                <link.icon onClick={() => window.open(link.url, '_blank')} className="w-6 h-6" />
+                            </div>
+                          ))}
+                        </div>
+                        <p className="text-md text-gray-600 dark:text-gray-300 mt-2 mb-4 leading-relaxed">
                         {homeData.bio}
                         </p>
                     </div>
@@ -214,23 +337,8 @@ export default function Home() {
 
 
             </div>
-            {/* Social Links */}
-            <div className="fixed flex justify-center">
-            {homeData.socialLinks.map((link) => (
-                <Tooltip key={link.name} content={<p className="text-xs">{link.name}</p>} offset={-5}>
-                    <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-3 rounded-full transition-all duration-200 ${link.name === 'LinkedIn' ? 'linkedin' : ''} ${link.name === 'Twitter' ? 'twitter' : ''} ${link.color}`}
-                    aria-label={link.name}
-                    >
-                    <link.icon className="w-6 h-6" />
-                    </a>
-                </Tooltip>
-            ))}
-            </div>
+
+
         </div>
     );
 } 
