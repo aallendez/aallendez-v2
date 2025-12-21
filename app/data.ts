@@ -39,7 +39,7 @@ export interface MenuItem {
 export const homeData: HomeData = {
   name: "Juan Alonso-Allende",
   bio: "Software & Product Engineer",
-  profilePicture: "/app/assets/pfp.png",
+  profilePicture: "/app/assets/juan-2.png",
   location: "Madrid, Spain",
   status: "",
   socialLinks: [

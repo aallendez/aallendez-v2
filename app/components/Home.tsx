@@ -1,16 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { homeData, menuItems } from "~/data";
 import {Tooltip} from "@heroui/tooltip";
 import { ArrowDown } from "lucide-react";
 import { animate, onScroll, createScope, createSpring, createDraggable, Scope } from 'animejs';
+import PageContainer from "./PageContainer";
+import AboutPage from "./pages/AboutPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ContactPage from "./pages/ContactPage";
+import SocialsPage from "./pages/SocialsPage";
 
 export default function Home() {
     const root = useRef<HTMLDivElement>(null);
     const profileContainerRef = useRef<HTMLDivElement>(null);
+    const homePageRef = useRef<HTMLDivElement>(null);
     const scope = useRef<Scope | null>(null);
     const cleanupRef = useRef<(() => void) | null>(null);
     const [ rotations, setRotations ] = useState(0);
     const [ menuOpen, setMenuOpen ] = useState(false);
+    const [ activePage, setActivePage ] = useState<string | null>(null);
     
     
     // useEffect(() => {
@@ -255,6 +262,32 @@ export default function Home() {
         }
     }, [menuOpen]);
 
+    // Animate home page slide when a page is opened/closed
+    useEffect(() => {
+        if (!homePageRef.current) return;
+
+        // Set initial position
+        if (homePageRef.current.style.transform === '') {
+            homePageRef.current.style.transform = 'translateX(0%)';
+        }
+
+        if (activePage) {
+            // Slide home page to the left
+            animate(homePageRef.current, {
+                x: ['0%', '-100%'],
+                ease: 'inOut(3)',
+                duration: 1000,
+            });
+        } else {
+            // Slide home page back in from the left
+            animate(homePageRef.current, {
+                x: ['-100%', '0%'],
+                ease: 'inOut(3)',
+                duration: 1000,
+            });
+        }
+    }, [activePage]);
+
     // Close menu on outside click or Escape
     useEffect(() => {
         const onDocClick = (e: MouseEvent) => {
@@ -265,7 +298,12 @@ export default function Home() {
             }
         };
         const onKey = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') setMenuOpen(false);
+            if (e.key === 'Escape') {
+                setMenuOpen(false);
+                if (activePage) {
+                    setActivePage(null);
+                }
+            }
         };
         document.addEventListener('click', onDocClick);
         document.addEventListener('keydown', onKey);
@@ -273,72 +311,106 @@ export default function Home() {
             document.removeEventListener('click', onDocClick);
             document.removeEventListener('keydown', onKey);
         };
-    }, [menuOpen]);
+    }, [menuOpen, activePage]);
+
+    const handleMenuItemClick = (key: string) => {
+        setMenuOpen(false);
+        setActivePage(key);
+    };
+
+    const handleBack = () => {
+        setActivePage(null);
+    };
+
+    // Map page keys to components
+    const pageComponents: Record<string, React.ComponentType> = {
+        'about': AboutPage,
+        'projects': ProjectsPage,
+        'contact': ContactPage,
+        'socials': SocialsPage,
+    };
 
     return (
-        <div ref={root} className="min-h-screen dark:text-white w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center px-4 relative overflow-y-auto">
-            
-            <div className="fixed text-center mx-auto z-10">
-                {/* Profile Picture */}
-                <div id="profile" className="w-full space-y-4">
-                    {/* Profile Picture arrow */}
-                    <div className="flex flex-col items-center justify-center w-full">
-                        Press below!
-                        <div className="animate-bounce-down">
-                            <ArrowDown />
-                        </div>
-                    </div>
-
-                    <div ref={profileContainerRef} className="relative w-48 h-48 mx-auto">
-                        {/* Radial menu items (initially centered; animated outward) */}
-                        <div className="pointer-events-none absolute inset-0">
-                            <div className="relative w-full h-full">
-                                {menuItems.map((item, index) => (
-                                    <button
-                                        key={item.key}
-                                        className={`cursor-pointer hover:shadow-md transition-all duration-300 radial-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur px-3 py-1 text-sm text-gray-900 dark:text-gray-100 shadow-sm border border-black/5 dark:border-white/5 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            // Placeholder actions by label
-                                            setMenuOpen(false);
-                                        }}
-                                        aria-label={item.label}
-                                    >
-                                        {item.label}
-                                    </button>
-                                ))}
+        <div ref={root} className="min-h-screen dark:text-white w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+            {/* Home Page */}
+            <div 
+                ref={homePageRef}
+                className="absolute inset-0 w-full h-full flex items-center justify-center px-4 overflow-y-auto"
+            >
+                <div className="fixed text-center mx-auto z-10">
+                    {/* Profile Picture */}
+                    <div id="profile" className="w-full space-y-4">
+                        {/* Profile Picture arrow */}
+                        <div className="flex flex-col items-center justify-center w-full">
+                            Press below!
+                            <div className="animate-bounce-down">
+                                <ArrowDown />
                             </div>
                         </div>
 
-                        <img
-                            src={homeData.profilePicture}
-                            alt="Profile Picture"
-                            className="w-48 h-48 rounded-full mx-auto shadow-lg object-cover pfp-hover-scale profilePic logo relative z-10"
-                        />
-                    </div>
-
-                    {/* Name & Bio */}
-                    <div className="">
-                        <h1 className="text-3xl font-bold mb-4">
-                        {homeData.name}
-                        </h1>
-                        <div className="flex items-center justify-center gap-6 cursor-pointer">
-                          {homeData.socialLinks.map((link, index) => (
-                            <div key={link.name} className={`${link.color}  transition-all duration-300 flex items-center justify-center `} style={{ animationDelay: `${index * 0.5}s` }}>
-                                <link.icon onClick={() => window.open(link.url, '_blank')} className="w-6 h-6" />
+                        <div ref={profileContainerRef} className="relative w-48 h-48 mx-auto">
+                            {/* Radial menu items (initially centered; animated outward) */}
+                            <div className="pointer-events-none absolute inset-0">
+                                <div className="relative w-full h-full">
+                                    {menuItems.map((item, index) => (
+                                        <button
+                                            key={item.key}
+                                            className={`cursor-pointer hover:shadow-md transition-all duration-300 radial-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur px-3 py-1 text-sm text-gray-900 dark:text-gray-100 shadow-sm border border-black/5 dark:border-white/5 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleMenuItemClick(item.key);
+                                            }}
+                                            aria-label={item.label}
+                                        >
+                                            {item.label}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                          ))}
+
+                            <img
+                                src={homeData.profilePicture}
+                                alt="Profile Picture"
+                                className="w-48 h-48 rounded-full mx-auto shadow-lg object-cover pfp-hover-scale profilePic logo relative z-10"
+                            />
                         </div>
-                        <p className="text-md text-gray-600 dark:text-gray-300 mt-2 mb-4 leading-relaxed">
-                        {homeData.bio}
-                        </p>
+
+                        {/* Name & Bio */}
+                        <div className="">
+                            <h1 className="text-3xl font-bold mb-4">
+                            {homeData.name}
+                            </h1>
+                            <div className="flex items-center justify-center gap-6 cursor-pointer">
+                              {homeData.socialLinks.map((link, index) => (
+                                <div key={link.name} className={`${link.color}  transition-all duration-300 flex items-center justify-center `} style={{ animationDelay: `${index * 0.5}s` }}>
+                                    <link.icon onClick={() => window.open(link.url, '_blank')} className="w-6 h-6" />
+                                </div>
+                              ))}
+                            </div>
+                            <p className="text-md text-gray-600 dark:text-gray-300 mt-2 mb-4 leading-relaxed">
+                            {homeData.bio}
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
 
-
+            {/* Page Containers for each menu item */}
+            {menuItems.map((item) => {
+                const PageComponent = pageComponents[item.key];
+                if (!PageComponent) return null;
+                
+                return (
+                    <PageContainer
+                        key={item.key}
+                        isActive={activePage === item.key}
+                        onBack={handleBack}
+                        title={item.label}
+                    >
+                        <PageComponent />
+                    </PageContainer>
+                );
+            })}
         </div>
     );
 } 
