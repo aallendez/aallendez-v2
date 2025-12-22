@@ -363,7 +363,7 @@ export default function Home() {
                                     {menuItems.map((item, index) => (
                                         <button
                                             key={item.key}
-                                            className={`cursor-pointer hover:shadow-md transition-all duration-300 radial-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur px-3 py-1 text-sm text-gray-900 dark:text-gray-100 shadow-sm border border-black/5 dark:border-white/5 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                                            className={`cursor-pointer hover:shadow-md transition-all duration-300 radial-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 dark:bg-gray-600/80 backdrop-blur p-3 w-28 text-sm text-gray-900 dark:text-gray-100 shadow-sm border border-black/5 dark:border-white/5 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleMenuItemClick(item.key);
