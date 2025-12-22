@@ -15,6 +15,7 @@ export default function Home() {
     const homePageRef = useRef<HTMLDivElement>(null);
     const scope = useRef<Scope | null>(null);
     const cleanupRef = useRef<(() => void) | null>(null);
+    const hasNavigatedRef = useRef(false);
     const [ rotations, setRotations ] = useState(0);
     const [ menuOpen, setMenuOpen ] = useState(false);
     const [ activePage, setActivePage ] = useState<string | null>(null);
@@ -266,9 +267,15 @@ export default function Home() {
     useEffect(() => {
         if (!homePageRef.current) return;
 
-        // Set initial position
-        if (homePageRef.current.style.transform === '') {
+        // Set initial position without animation only on very first render (when activePage is null)
+        if (!hasNavigatedRef.current && activePage === null) {
             homePageRef.current.style.transform = 'translateX(0%)';
+            return;
+        }
+
+        // Mark that we've navigated once activePage becomes truthy
+        if (activePage !== null) {
+            hasNavigatedRef.current = true;
         }
 
         if (activePage) {
@@ -278,8 +285,8 @@ export default function Home() {
                 ease: 'inOut(3)',
                 duration: 1000,
             });
-        } else {
-            // Slide home page back in from the left
+        } else if (hasNavigatedRef.current) {
+            // Slide home page back in from the left (only if we've navigated before)
             animate(homePageRef.current, {
                 x: ['-100%', '0%'],
                 ease: 'inOut(3)',

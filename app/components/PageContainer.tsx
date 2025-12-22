@@ -17,14 +17,9 @@ export default function PageContainer({ children, isActive, onBack, title }: Pag
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Set initial position
-    if (!hasAnimatedRef.current) {
-      containerRef.current.style.transform = 'translateX(100%)';
-      hasAnimatedRef.current = true;
-    }
-
     if (isActive) {
       // Slide in from right
+      hasAnimatedRef.current = true;
       animate(containerRef.current, {
         x: ['100%', '0%'],
         ease: 'inOut(3)',
@@ -46,6 +41,9 @@ export default function PageContainer({ children, isActive, onBack, title }: Pag
       className={`absolute inset-0 w-full h-full ${
         isActive ? 'z-20' : 'z-10'
       }`}
+      style={{
+        transform: isActive ? undefined : 'translateX(100%)',
+      }}
     >
       {/* Back Button - Center Left */}
       {isActive && (
@@ -60,10 +58,11 @@ export default function PageContainer({ children, isActive, onBack, title }: Pag
       )}
 
       {/* Page Content */}
-      <div className="w-full h-full overflow-y-auto">
+      <div className="max-w-6xl mx-auto h-full overflow-y-auto">
         {title && (
           <div className="pt-20 pb-8 px-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
+            <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-800" />
           </div>
         )}
         <div className="px-8 pb-8">
