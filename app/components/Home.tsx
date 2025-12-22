@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { homeData, menuItems } from "~/data";
+import { homeData, menuItems, pageIntroductions } from "~/data";
 import {Tooltip} from "@heroui/tooltip";
 import { ArrowDown } from "lucide-react";
 import { animate, onScroll, createScope, createSpring, createDraggable, Scope } from 'animejs';
@@ -413,6 +413,7 @@ export default function Home() {
                         isActive={activePage === item.key}
                         onBack={handleBack}
                         title={item.label}
+                        introduction={pageIntroductions[item.key]?.text}
                     >
                         <PageComponent />
                     </PageContainer>

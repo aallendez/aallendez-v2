@@ -8,9 +8,10 @@ interface PageContainerProps {
   isActive: boolean;
   onBack: () => void;
   title?: string;
+  introduction?: string;
 }
 
-export default function PageContainer({ children, isActive, onBack, title }: PageContainerProps) {
+export default function PageContainer({ children, isActive, onBack, title, introduction }: PageContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const hasAnimatedRef = useRef(false);
 
@@ -63,6 +64,11 @@ export default function PageContainer({ children, isActive, onBack, title }: Pag
           <div className="pt-20 pb-8 px-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
             <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-800" />
+            {introduction && (
+              <div className="mt-4 p-4 bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur rounded-lg border border-blue-200/50 dark:border-blue-800/50">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{introduction}</p>
+              </div>
+            )}
           </div>
         )}
         <div className="px-8 pb-8">

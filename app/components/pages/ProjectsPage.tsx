@@ -14,7 +14,9 @@ import { FaDocker, FaDatabase } from "react-icons/fa6";
 import { FaExternalLinkAlt, FaShopify, FaSpotify } from "react-icons/fa";
 import { FaAws } from "react-icons/fa";
 import { VscAzure } from "react-icons/vsc";
-import { projects } from "~/data";
+import { projects, projectTopics } from "~/data";
+import { FiExternalLink } from "react-icons/fi";
+
 
 export const GrpcIcon = (props: React.SVGProps<SVGSVGElement>) => {
   const [isDark, setIsDark] = useState(false);
@@ -61,35 +63,10 @@ export default function ProjectsPage() {
     new Set(projects.map(p => p.date))
   ).sort((a, b) => b.localeCompare(a)); // Sort descending
 
-  // Categorize project by topic based on stack
-  const getProjectTopic = (project: typeof projects[0]): string => {
-    const stack = project.stack.map(s => s.toLowerCase());
-    
-    // AI/ML indicators (strong indicators take priority)
-    const aiMlTechs = ['langchain', 'langgraph', 'pytorch', 'pandas', 'scikit-learn', 'scikitlearn', 'tensorflow', 'chromadb', 'apache spark', 'spark'];
-    const hasAiMl = aiMlTechs.some(tech => stack.some(s => s.includes(tech.toLowerCase()) || s === tech.toLowerCase()));
-    
-    // HPC indicators (strong indicators take priority)
-    const hpcTechs = ['cuda', 'mpi', 'openmp', 'slurm'];
-    const hasHpc = hpcTechs.some(tech => stack.some(s => s.includes(tech.toLowerCase()) || s === tech.toLowerCase())) ||
-                   stack.includes('c');
-    
-    // Full-Stack indicators (frontend + backend)
-    const fullStackTechs = ['javascript', 'typescript', 'firebase', 'django', 'fast-api', 'fastapi', 'rest', 'graphql', 'mongodb', 'sql', 'shopify'];
-    const hasFullStack = fullStackTechs.some(tech => stack.some(s => s.includes(tech.toLowerCase()) || s === tech.toLowerCase()));
-    
-    // Priority: HPC > AI/ML > Full-Stack
-    if (hasHpc) return 'HPC';
-    if (hasAiMl) return 'AI/ML';
-    if (hasFullStack) return 'Full-Stack';
-    
-    return 'Full-Stack'; // Default fallback
-  };
-
   // Filter projects based on selected year and topic
   const filteredProjects = projects.filter(project => {
     const yearMatch = selectedYear === 'all' || project.date === selectedYear;
-    const topicMatch = selectedTopic === 'all' || getProjectTopic(project) === selectedTopic;
+    const topicMatch = selectedTopic === 'all' || project.topic.includes(selectedTopic);
     return yearMatch && topicMatch;
   });
 
@@ -158,21 +135,18 @@ export default function ProjectsPage() {
 
   // ProjectCard component
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
-    return (
-      <a
-        href={project.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-lg border border-black/5 dark:border-white/5 hover:shadow-lg transition-all duration-300 overflow-hidden group"
-      >
+    const isActive = project.active;
+    
+    const cardContent = (
+      <>
         {/* Project Image */}
         <div className="relative w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover"
           />
-          {!project.active && (
+          {!isActive && (
             <div className="absolute top-2 right-2 px-2 py-1 bg-red-500/80 text-white text-xs rounded">
               Discontinued
             </div>
@@ -183,10 +157,14 @@ export default function ProjectsPage() {
         <div className="p-4 space-y-3">
           {/* Title and Date */}
           <div className="flex items-start justify-between">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <h3 className={`text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors duration-500 ease-in-out ${
+              isActive ? 'group-hover:text-blue-600 dark:group-hover:text-blue-400' : 'opacity-75'
+            }`}>
               {project.title}
             </h3>
-            <FaExternalLinkAlt className="w-4 h-4 text-gray-400 dark:text-gray-500 mt-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+            {isActive && (
+              <FiExternalLink className="w-4 h-4 text-gray-400 dark:text-gray-500 mt-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out" />
+            )}
           </div>
           
           <p className="text-xs text-gray-500 dark:text-gray-400">{project.date}</p>
@@ -212,20 +190,45 @@ export default function ProjectsPage() {
             })}
           </div>
         </div>
-      </a>
+      </>
+    );
+
+    if (isActive) {
+      return (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project-card block bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-lg border border-black/5 dark:border-white/5 overflow-hidden group"
+        >
+          {cardContent}
+        </a>
+      );
+    }
+
+    return (
+      <div
+        className="block bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-lg border border-black/5 dark:border-white/5 overflow-hidden opacity-75 cursor-not-allowed"
+      >
+        {cardContent}
+      </div>
     );
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-12">
+    <div className="max-w-6xl mx-auto space-y-12 py-10">
       {/* Stack Section */}
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Stack</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Stack</h2>
+        <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-800" />
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
+          As time has passed and I've tried new things, I've learned a lot of technologies and languages. Here are some of the ones I've used.
+        </p>
         
         <div className="flex flex-wrap gap-4">
           {/* Programming */}
           <div className="flex flex-wrap gap-2 items-center">
-            <span className="text-lg font-semibold text-gray-800 dark:text-gray-200 mr-2">Programming:</span>
+            <span className="text-lg font-semibold text-gray-800 dark:text-gray-200 mr-2 ml-4">Programming:</span>
             {techStack.programming.map((tech) => {
               const IconComponent = getTechIcon(tech);
               return (
@@ -330,12 +333,13 @@ export default function ProjectsPage() {
       {/* Projects Section */}
       <section>
         <div className="mb-6">
-          <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100 text-left">Projects</h2>
-          
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-left">Projects</h2>
+          <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-800" />
+
           {/* Filter Section */}
-          <div className="space-y-3">
+          <div className="flex items-start gap-6">
             {/* Year Filter */}
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 p-4 bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur rounded-lg border border-blue-200/50 dark:border-blue-800/50">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300 mr-2">Year:</span>
               <button
                 onClick={() => setSelectedYear('all')}
@@ -363,7 +367,7 @@ export default function ProjectsPage() {
             </div>
 
             {/* Topic Filter */}
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 p-4 bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur rounded-lg border border-blue-200/50 dark:border-blue-800/50">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300 mr-2">Topic:</span>
               <button
                 onClick={() => setSelectedTopic('all')}
@@ -375,7 +379,7 @@ export default function ProjectsPage() {
               >
                 All
               </button>
-              {['AI/ML', 'Full-Stack', 'HPC'].map((topic) => (
+              {projectTopics.map((topic) => (
                 <button
                   key={topic}
                   onClick={() => setSelectedTopic(topic)}

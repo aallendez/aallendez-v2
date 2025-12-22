@@ -31,11 +31,16 @@ export interface Project {
     stack: string[];
     url: string;
     active: boolean;
+    topic: string[];
 }
 
 export interface MenuItem {
     key: string;
     label: string;
+}
+
+export interface PageIntroduction {
+    text: string;
 }
 
 export const homeData: HomeData = {
@@ -84,7 +89,34 @@ export const menuItems: MenuItem[] = [
     { key: 'socials', label: 'Socials' },
 ];
 
+export const pageIntroductions: Record<string, PageIntroduction> = {
+    'about': {
+        text: 'Learn more about my background, experience, and passion for building great software products.'
+    },
+    'projects': {
+        text: 'It started with legos 🏗️ ... I\'ve always loved to build things. These are some of the things I\'ve worked on since I discovered software engineering.'
+    },
+    'contact': {
+        text: 'Get in touch if you\'d like to collaborate, discuss opportunities, or just say hello!'
+    },
+    'socials': {
+        text: 'Connect with me on these platforms to stay updated on my latest work and thoughts.'
+    },
+};
+
+export const projectTopics: string[] = ['AI / ML', 'Full-Stack', 'HPC', 'DevOps / Infra'];
+
 export const projects: Project[] = [
+    {
+        title: 'Zeffo AI',
+        date: '2025',
+        image: '/app/assets/zeffo.png',
+        description: 'Multi-cloud, AI-powered ticket resolution platform to keep company docs up to date and improve based metrics and A/B experiment tracking.',
+        stack: ['TypeScript', 'Firebase', 'Python', 'Langchain / Langgraph', 'SQL', 'ChromaDB', 'Fast-API', 'Docker', 'Terraform', 'AWS', 'Azure', 'Grafana', 'Prometheus'],
+        url: 'https://github.com/aallendez/zeffo-ai',
+        active: true,
+        topic: ['AI / ML', 'Full-Stack', 'DevOps / Infra'],
+    },
     {
         title: 'Holonote',
         date: '2025',
@@ -93,24 +125,17 @@ export const projects: Project[] = [
         stack: ['TypeScript', 'Firebase', 'Fast-API', 'SQL', 'Docker', 'Terraform', 'AWS', 'Grafana', 'Prometheus'],
         url: 'https://github.com/aallendez/holonote',
         active: true,
+        topic: ['Full-Stack', 'DevOps / Infra'],
     },
     {
-        title: 'Zeffo AI',
-        date: '2025',
-        image: '/app/assets/zeffo.png',
-        description: 'AI-powered application leveraging machine learning for intelligent solutions.',
-        stack: ['TypeScript', 'Firebase', 'Python', 'Langchain / Langgraph', 'ChromaDB', 'Fast-API', 'Docker', 'Terraform', 'AWS', 'Azure', 'Grafana', 'Prometheus'],
-        url: 'https://github.com/aallendez/zeffo-ai',
-        active: true,
-    },
-    {
-        title: 'GPU-Accelerated Monte Carlo for Systemic Risk',
+        title: 'GPU Monte Carlo Simulations',
         date: '2025',
         image: '/app/assets/ico.png',
-        description: 'Hybrid C++/CUDA Monte Carlo engine for systemic crash probability estimation across correlated EU equity indices.',
-        stack: ['C', 'CUDA', 'MPI', 'OpenMP', 'Linux'],
+        description: 'Hybrid C/CUDA Monte Carlo engine for systemic crash probability estimation across correlated EU equity indices.',
+        stack: ['C', 'CUDA', 'MPI', 'OpenMP', 'Slurm', 'Linux'],
         url: 'https://github.com/javidsegura/gpu-montecarlo-risk',
         active: true,
+        topic: ['HPC', 'AI / ML'],
     },
     {
         title: 'Mantis Malware Classifier',
@@ -120,6 +145,7 @@ export const projects: Project[] = [
         stack: ['Python', 'Pytorch', 'Pandas', 'Scikit-Learn', 'Docker'],
         url: 'https://github.com/aallendez/mantis-classifier',
         active: true,
+        topic: ['AI / ML'],
     },
     {
         title: 'Spoticircle',
@@ -129,6 +155,7 @@ export const projects: Project[] = [
         stack: ['TypeScript', 'Spotify API'],
         url: 'https://spoticircle.xyz',
         active: true,
+        topic: ['Full-Stack'],
     },
     {
         title: 'Stonks App',
@@ -138,6 +165,7 @@ export const projects: Project[] = [
         stack: ['Python', 'Fast-API', 'SQL', 'Docker', 'Azure'],
         url: 'https://github.com/aallendez/stonks-app',
         active: true,
+        topic: ['Full-Stack', 'DevOps / Infra'],
     },
     {
         title: 'Coffee Subscription Flow',
@@ -147,6 +175,7 @@ export const projects: Project[] = [
         stack: ['TypeScript', 'graphQL', 'Shopify'],
         url: 'https://www.cricklecreekcoffee.com/pages/subscription',
         active: true,
+        topic: ['Full-Stack'],
     },
     {
         title: 'ML Model',
@@ -156,6 +185,7 @@ export const projects: Project[] = [
         stack: ['Python', 'Pandas', 'Scikit-Learn'],
         url: 'https://github.com/aallendez/ml-model',
         active: true,
+        topic: ['AI / ML'],
     },
     {
         title: 'LaRocket Support Chatbot',
@@ -165,5 +195,6 @@ export const projects: Project[] = [
         stack: ['JavaScript', 'Python', 'Langchain / Langgraph', 'Fast-API', 'MongoDB'],
         url: 'https://github.com/aallendez/larocket-chatbot',
         active: false,
+        topic: ['AI / ML', 'Full-Stack'],
     },
 ];
