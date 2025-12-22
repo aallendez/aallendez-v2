@@ -7,7 +7,7 @@ export function Footer() {
                 I strongly recommend viewing this website on a desktop :)
             </p>
             <p className="text-sm text-center text-gray-500 dark:text-gray-400">
-                &copy; {new Date().getFullYear()} 🇪🇸 Built by <a href="https://aallendez.me" className="text-blue-500 underline">Juan</a> in Madrid, Spain.
+                &copy; {new Date().getFullYear()} 🇪🇸 Built by Juan in Madrid, Spain.
             </p>
         </div>
     );

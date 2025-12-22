@@ -8,6 +8,7 @@ import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import SocialsPage from "./pages/SocialsPage";
+import { Footer } from "./Footer";
 
 export default function Home() {
     const root = useRef<HTMLDivElement>(null);
@@ -400,6 +401,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
 
             {/* Page Containers for each menu item */}

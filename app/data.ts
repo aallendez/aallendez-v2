@@ -94,7 +94,7 @@ export const pageIntroductions: Record<string, PageIntroduction> = {
         text: 'Learn more about my background, experience, and passion for building great software products.'
     },
     'projects': {
-        text: 'It started with legos 🏗️ ... I\'ve always loved to build things. These are some of the things I\'ve worked on since I discovered software engineering.'
+        text: 'It all started with legos 🏗️ ... I\'ve always loved to build things. These are some of the things I\'ve worked on since I discovered software engineering.'
     },
     'contact': {
         text: 'Get in touch if you\'d like to collaborate, discuss opportunities, or just say hello!'
@@ -163,7 +163,7 @@ export const projects: Project[] = [
         image: '/app/assets/stonks.png',
         description: 'Financial tracker',
         stack: ['Python', 'Fast-API', 'SQL', 'Docker', 'Azure'],
-        url: 'https://github.com/aallendez/stonks-app',
+        url: 'https://www.loom.com/share/6890bb6f4f3a486891700ad43c832a97?sid=d1c9a8be-22ce-44f3-83c0-88e186fb1a58',
         active: true,
         topic: ['Full-Stack', 'DevOps / Infra'],
     },
@@ -183,7 +183,7 @@ export const projects: Project[] = [
         image: '/app/assets/euro2024.jpeg',
         description: 'The day before the Euro 2024 final, I made a model to predict the outcome of the game between Spain and England based on tournament performance.',
         stack: ['Python', 'Pandas', 'Scikit-Learn'],
-        url: 'https://github.com/aallendez/ml-model',
+        url: 'https://github.com/aallendez/euro-final-ml-prediction',
         active: true,
         topic: ['AI / ML'],
     },
@@ -191,8 +191,8 @@ export const projects: Project[] = [
         title: 'LaRocket Support Chatbot',
         date: '2024',
         image: '/app/assets/chatbot_larocket.png',
-        description: 'AI chatbot application for customer support (discontinued).',
-        stack: ['JavaScript', 'Python', 'Langchain / Langgraph', 'Fast-API', 'MongoDB'],
+        description: 'AI chatbot application for customer support.',
+        stack: ['JavaScript', 'Python', 'Langchain / Langgraph', 'MongoDB'],
         url: 'https://github.com/aallendez/larocket-chatbot',
         active: false,
         topic: ['AI / ML', 'Full-Stack'],

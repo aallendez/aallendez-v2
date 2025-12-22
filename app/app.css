@@ -56,27 +56,53 @@ html.dark body {
   @apply bg-gray-900;
 }
 
-/* This targets the scrollbar track (the background) */
-::-webkit-scrollbar-track {
-  background-color: transparent; /* Makes the track background transparent */
-}
-
-/* This targets the scrollbar handle */
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.1); /* Dark handle for contrast */
-  border-radius: 4px; /* Optional: Rounds the corners of the scrollbar handle */
-}
-
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-thumb {
-  background-color: rgba(255,255,255,0.2); /* Light handle for dark mode */
-}
-
-/* This targets the scrollbar itself (the whole scrollbar container) */
+/* Hide scrollbar but keep scrolling functionality */
+/* For Chrome, Safari, and Edge */
 ::-webkit-scrollbar {
-  width: 8px; /* Adjusts the width of the vertical scrollbar */
-  height: 8px; /* Adjusts the height of the horizontal scrollbar */
+  width: 0px;
+  height: 0px;
+  background: transparent;
 }
+
+/* For Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Alternative: Thin scrollbar positioned absolutely on the right */
+/* Uncomment below and comment out the above to use this instead */
+/*
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+  position: absolute;
+  right: 0;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.3);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+.dark * {
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+*/
 
 /* Smooth transitions for theme changes */
 * {
@@ -143,7 +169,7 @@ html.dark body {
 }
 
 .project-card img {
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   will-change: transform;
 }
 
