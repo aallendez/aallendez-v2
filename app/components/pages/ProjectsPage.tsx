@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { TbApi } from 'react-icons/tb';
 import { GrGraphQl } from "react-icons/gr";
 import { FaDocker, FaDatabase } from "react-icons/fa6";
-import { FaExternalLinkAlt, FaShopify, FaSpotify } from "react-icons/fa";
+import { FaExternalLinkAlt, FaShopify, FaSpotify, FaGithub, FaFileAlt, FaPlay, FaVideo } from "react-icons/fa";
 import { FaAws } from "react-icons/fa";
 import { VscAzure } from "react-icons/vsc";
 import { projects, projectTopics } from "~/data";
@@ -133,9 +133,60 @@ export default function ProjectsPage() {
     other: ['CUDA', 'Slurm', 'MPI', 'OpenMP']
   };
 
+  // Helper function to get icon for link type
+  const getLinkIcon = (linkType: string) => {
+    const iconMap: Record<string, any> = {
+      'repo': FaGithub,
+      'github': FaGithub,
+      'paper': FaFileAlt,
+      'article': FaFileAlt,
+      'demo': FaVideo,
+      'video': FaVideo,
+      'play': FaVideo,
+    };
+    return iconMap[linkType.toLowerCase()] || FiExternalLink;
+  };
+
+  // Helper function to format link type label
+  const formatLinkLabel = (linkType: string) => {
+    const labelMap: Record<string, string> = {
+      'repo': 'Code',
+      'github': 'GitHub',
+      'paper': 'Paper',
+      'article': 'Article',
+      'demo': 'Demo',
+      'video': 'Video',
+      'play': 'Play',
+    };
+    return labelMap[linkType.toLowerCase()] || linkType.charAt(0).toUpperCase() + linkType.slice(1);
+  };
+
   // ProjectCard component
   const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
     const isActive = project.active;
+    
+    // Get all available links (support both old url and new urls format)
+    const getProjectLinks = () => {
+      const links: Array<{ type: string; url: string }> = [];
+      
+      // Support new urls format
+      if (project.urls) {
+        Object.entries(project.urls).forEach(([type, url]) => {
+          if (url) {
+            links.push({ type, url });
+          }
+        });
+      }
+      
+      // Support old url format for backward compatibility
+      if (project.url && !project.urls) {
+        links.push({ type: 'link', url: project.url });
+      }
+      
+      return links;
+    };
+
+    const projectLinks = getProjectLinks();
     
     const cardContent = (
       <>
@@ -162,12 +213,33 @@ export default function ProjectsPage() {
             }`}>
               {project.title}
             </h3>
-            {isActive && (
-              <FiExternalLink className="w-4 h-4 text-gray-400 dark:text-gray-500 mt-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out" />
-            )}
           </div>
           
-          <p className="text-xs text-gray-500 dark:text-gray-400">{project.date}</p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs text-gray-500 dark:text-gray-400">{project.date}</p>
+            
+            {/* Links */}
+            {isActive && projectLinks.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {projectLinks.map((link) => {
+                  const LinkIcon = getLinkIcon(link.type);
+                  return (
+                    <a
+                      key={link.type}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-1 px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-md text-xs font-medium hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors border border-blue-200/50 dark:border-blue-800/50"
+                    >
+                      <LinkIcon className="w-3.5 h-3.5" />
+                      <span className="text-xs">{formatLinkLabel(link.type)}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </div>
 
           {/* Description */}
           <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -193,22 +265,11 @@ export default function ProjectsPage() {
       </>
     );
 
-    if (isActive) {
-      return (
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="project-card block bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-lg border border-black/5 dark:border-white/5 overflow-hidden group"
-        >
-          {cardContent}
-        </a>
-      );
-    }
-
     return (
       <div
-        className="block bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-lg border border-black/5 dark:border-white/5 overflow-hidden opacity-75 cursor-not-allowed"
+        className={`block bg-white/50 dark:bg-gray-800/50 backdrop-blur rounded-lg border border-black/5 dark:border-white/5 overflow-hidden ${
+          isActive ? 'group' : 'opacity-75 cursor-not-allowed'
+        }`}
       >
         {cardContent}
       </div>
@@ -216,7 +277,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-12 py-10">
+    <div className="max-w-6xl mx-auto space-y-8">
       {/* Stack Section */}
       <section>
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Stack</h2>

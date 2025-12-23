@@ -29,7 +29,8 @@ export interface Project {
     image: string;
     description: string;
     stack: string[];
-    url: string;
+    url?: string; // Deprecated: use urls instead, kept for backward compatibility
+    urls?: Record<string, string>; // e.g., { repo: '...', paper: '...', demo: '...', video: '...' }
     active: boolean;
     topic: string[];
 }
@@ -113,7 +114,11 @@ export const projects: Project[] = [
         image: '/app/assets/zeffo.png',
         description: 'Multi-cloud, AI-powered ticket resolution platform to keep company docs up to date and improve based metrics and A/B experiment tracking.',
         stack: ['TypeScript', 'Firebase', 'Python', 'Langchain / Langgraph', 'SQL', 'ChromaDB', 'Fast-API', 'Docker', 'Terraform', 'AWS', 'Azure', 'Grafana', 'Prometheus'],
-        url: 'https://github.com/aallendez/zeffo-ai',
+        urls: {
+            repo: 'https://github.com/aallendez/zeffo-ai',
+            article: 'https://medium.com/@jdominguez.ieu2023/building-zeffo-how-we-engineered-an-ai-powered-ticket-resolution-platform-a22c10fe255b',
+            demo: 'https://drive.google.com/file/d/1DXYTPFLoJXol0JLzNz4NDOBUJ9i1Gvg_/view?usp=sharing',
+        },
         active: true,
         topic: ['AI / ML', 'Full-Stack', 'DevOps / Infra'],
     },
@@ -123,7 +128,9 @@ export const projects: Project[] = [
         image: '/app/assets/montecarlo.png',
         description: 'Hybrid C/CUDA Monte Carlo engine for systemic crash probability estimation across correlated EU equity indices.',
         stack: ['C', 'CUDA', 'MPI', 'OpenMP', 'Slurm', 'Linux'],
-        url: 'https://github.com/javidsegura/gpu-montecarlo-risk',
+        urls: {
+            repo: 'https://github.com/javidsegura/gpu-montecarlo-risk',
+        },
         active: true,
         topic: ['HPC', 'AI / ML'],
     },
@@ -143,7 +150,10 @@ export const projects: Project[] = [
         image: '/app/assets/ico.png',
         description: 'Enterprise ML framework for tabular classification with automated hyperparameter tuning, LIME interpretability, and CI/CD.',
         stack: ['Python', 'Pytorch', 'Pandas', 'Scikit-Learn', 'Docker'],
-        url: 'https://github.com/aallendez/mantis-classifier',
+        urls: {
+            repo: 'https://github.com/aallendez/mantis-classifier',
+            paper: 'https://drive.google.com/file/d/102RXKY8GOQHDGrLsAnj3H2rpR4Bow-xU/view?usp=drive_link',
+        },
         active: true,
         topic: ['AI / ML'],
     },
@@ -163,7 +173,9 @@ export const projects: Project[] = [
         image: '/app/assets/stonks.png',
         description: 'Financial tracker',
         stack: ['Python', 'Fast-API', 'SQL', 'Docker', 'Azure'],
-        url: 'https://www.loom.com/share/6890bb6f4f3a486891700ad43c832a97?sid=d1c9a8be-22ce-44f3-83c0-88e186fb1a58',
+        urls: {
+            video: 'https://www.loom.com/share/6890bb6f4f3a486891700ad43c832a97?sid=d1c9a8be-22ce-44f3-83c0-88e186fb1a58',
+        },
         active: true,
         topic: ['Full-Stack', 'DevOps / Infra'],
     },
@@ -183,7 +195,9 @@ export const projects: Project[] = [
         image: '/app/assets/euro2024.jpeg',
         description: 'The day before the Euro 2024 final, I made a model to predict the outcome of the game between Spain and England based on tournament performance.',
         stack: ['Python', 'Pandas', 'Scikit-Learn'],
-        url: 'https://github.com/aallendez/euro-final-ml-prediction',
+        urls: {
+            repo: 'https://github.com/aallendez/euro-final-ml-prediction',
+        },
         active: true,
         topic: ['AI / ML'],
     },
