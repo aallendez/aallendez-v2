@@ -13,7 +13,7 @@ export const meta: Route.MetaFunction = () => {
 export default function HomePage() {
   return (
     <>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
       <Home />
     </>
   );

@@ -120,7 +120,7 @@ export const projects: Project[] = [
     {
         title: 'GPU Monte Carlo Simulations',
         date: '2025',
-        image: '/app/assets/ico.png',
+        image: '/app/assets/montecarlo.png',
         description: 'Hybrid C/CUDA Monte Carlo engine for systemic crash probability estimation across correlated EU equity indices.',
         stack: ['C', 'CUDA', 'MPI', 'OpenMP', 'Slurm', 'Linux'],
         url: 'https://github.com/javidsegura/gpu-montecarlo-risk',
