@@ -27,10 +27,10 @@ export default function AboutPage() {
           I love building software products 💻 - I'm currently building a cool one @ <a href="https://kiboventures.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Kibo Ventures</a>.
         </p>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          I also love music and playing guitar 🎸 - one of my dreams is to make an album 🤠
+          I also love music and playing guitar 🎸. One of my dreams is to make a music album 🤠.
         </p>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          I love challenging myself and doing endurance sports 🏊‍♂️, <a href="https://www.ironman.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Ironman 70.3</a> in 2027.
+          I love challenging myself and doing endurance sports 🏊‍♂️. Next up: 3rd 1/2 Marathon.
         </p>
         </div>
 

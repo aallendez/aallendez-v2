@@ -91,7 +91,7 @@ export const menuItems: MenuItem[] = [
 
 export const pageIntroductions: Record<string, PageIntroduction> = {
     'about': {
-        text: 'You don’t start with answers. You start with questions. - Osho'
+        text: 'Be curious, not judgmental. - Ted Lasso'
     },
     'projects': {
         text: 'It all started with legos 🏗️ ... I\'ve always loved to build things. These are some of the things I\'ve worked on since I discovered software engineering.'
@@ -118,16 +118,6 @@ export const projects: Project[] = [
         topic: ['AI / ML', 'Full-Stack', 'DevOps / Infra'],
     },
     {
-        title: 'Holonote',
-        date: '2025',
-        image: '/app/assets/holonote.png',
-        description: 'Production ready note-taking and organization platform. Whoop but for wellbeing.',
-        stack: ['TypeScript', 'Firebase', 'Fast-API', 'SQL', 'Docker', 'Terraform', 'AWS', 'Grafana', 'Prometheus'],
-        url: 'https://github.com/aallendez/holonote',
-        active: true,
-        topic: ['Full-Stack', 'DevOps / Infra'],
-    },
-    {
         title: 'GPU Monte Carlo Simulations',
         date: '2025',
         image: '/app/assets/ico.png',
@@ -136,6 +126,16 @@ export const projects: Project[] = [
         url: 'https://github.com/javidsegura/gpu-montecarlo-risk',
         active: true,
         topic: ['HPC', 'AI / ML'],
+    },
+    {
+        title: 'Holonote',
+        date: '2025',
+        image: '/app/assets/holonote.png',
+        description: 'Production ready note-taking and organization platform. Whoop but for wellbeing.',
+        stack: ['TypeScript', 'Firebase', 'Fast-API', 'SQL', 'Docker', 'Terraform', 'AWS', 'Grafana', 'Prometheus'],
+        url: 'https://github.com/aallendez/holonote',
+        active: true,
+        topic: ['Full-Stack', 'DevOps / Infra'],
     },
     {
         title: 'Mantis Malware Classifier',
