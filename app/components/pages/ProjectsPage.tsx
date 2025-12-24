@@ -280,10 +280,10 @@ export default function ProjectsPage() {
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Stack Section */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Stack</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">🛠️ Stack</h2>
         <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-          As time has passed and I've tried new things, I've learned a lot of technologies and languages. Here are some of the ones I've used.
+          As time has passed and I've tried new things, I've learned a lot of technologies and programming languages. Here are some of the ones I've used.
         </p>
         
         <div className="flex flex-wrap gap-4">
@@ -394,7 +394,7 @@ export default function ProjectsPage() {
       {/* Projects Section */}
       <section>
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-left">Projects</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-left">🗂️ Projects</h2>
           <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
 
           {/* Filter Section */}

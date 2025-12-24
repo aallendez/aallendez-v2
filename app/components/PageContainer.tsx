@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { animate } from 'animejs';
 import { ArrowLeft } from "lucide-react";
+import Callout from "./Callout";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -65,9 +66,7 @@ export default function PageContainer({ children, isActive, onBack, title, intro
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
             <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
             {introduction && (
-              <div className="mt-4 p-4 bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur rounded-lg border border-blue-200/50 dark:border-blue-800/50">
-                <p className={`text-gray-700 dark:text-gray-300 leading-relaxed ${title === "About me" ? " italic ": `*:`}`}>{introduction}</p>
-              </div>
+              <Callout content={introduction} italic={title === "About me"} />
             )}
           </div>
         )}

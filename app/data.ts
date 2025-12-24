@@ -84,10 +84,11 @@ export const projectPage: ProjectPage = {
 };
 
 export const menuItems: MenuItem[] = [
-    { key: 'about', label: 'About me' },
-    { key: 'projects', label: 'Projects' },
-    { key: 'contact', label: 'Contact' },
-    { key: 'socials', label: 'Socials' },
+    { key: 'projects', label: '🛠️ Projects' },
+    { key: 'about', label: '🎸 About me' },
+    // { key: 'contact', label: 'Contact' },
+    { key: 'interests', label: '🏊‍♂️ Interests' },
+    // { key: 'socials', label: 'Socials' },
 ];
 
 export const pageIntroductions: Record<string, PageIntroduction> = {
@@ -103,6 +104,9 @@ export const pageIntroductions: Record<string, PageIntroduction> = {
     'socials': {
         text: 'Connect with me on these platforms to stay updated on my latest work and thoughts.'
     },
+    'interests': {
+        text: 'In this page you can find things I\'m passionate about, what inspires me, and what keeps me curious.'
+    },
 };
 
 export const projectTopics: string[] = ['AI / ML', 'Full-Stack', 'HPC', 'DevOps / Infra'];
@@ -117,7 +121,7 @@ export const projects: Project[] = [
         urls: {
             repo: 'https://github.com/aallendez/zeffo-ai',
             article: 'https://medium.com/@jdominguez.ieu2023/building-zeffo-how-we-engineered-an-ai-powered-ticket-resolution-platform-a22c10fe255b',
-            demo: 'https://drive.google.com/file/d/1DXYTPFLoJXol0JLzNz4NDOBUJ9i1Gvg_/view?usp=sharing',
+            demo: 'https://youtu.be/oP243hvbMos',
         },
         active: true,
         topic: ['AI / ML', 'Full-Stack', 'DevOps / Infra'],

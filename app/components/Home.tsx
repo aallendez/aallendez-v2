@@ -8,6 +8,7 @@ import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import SocialsPage from "./pages/SocialsPage";
+import MyInterestsPage from "./pages/MyInterestsPage";
 import { Footer } from "./Footer";
 
 export default function Home() {
@@ -204,23 +205,35 @@ export default function Home() {
         const total = items.length;
 
         if (menuOpen) {
-            // Distribute items only on the left and right arcs, avoiding top/bottom
-            const rightCount = Math.ceil(total / 2);
-            const leftCount = total - rightCount;
+            let angles: number[];
+            
+            if (total === 3) {
+                // For exactly 3 items, arrange them in a triangle pattern
+                // Angles: 120° (left-up), 90° (up), 60° (right-up) in radians
+                angles = [
+                    310 * Math.PI / 180,  // Left-up
+                    270 * Math.PI / 180,   // Straight up
+                    230 * Math.PI / 180    // Right-up
+                ];
+            } else {
+                // For other counts, use the original distribution logic
+                const rightCount = Math.ceil(total / 2);
+                const leftCount = total - rightCount;
 
-            // Right side: angles from -60° to 60° (in radians: [-π/3, π/3])
-            const rightAngles = Array.from({ length: rightCount }, (_, i) => {
-                const t = rightCount === 1 ? 0.5 : i / (rightCount - 1);
-                return -Math.PI / 3 + t * (2 * Math.PI / 3);
-            });
+                // Right side: angles from -60° to 60° (in radians: [-π/3, π/3])
+                const rightAngles = Array.from({ length: rightCount }, (_, i) => {
+                    const t = rightCount === 1 ? 0.5 : i / (rightCount - 1);
+                    return -Math.PI / 3 + t * (2 * Math.PI / 3);
+                });
 
-            // Left side: angles from 120° to 240° (in radians: [2π/3, 4π/3])
-            const leftAngles = Array.from({ length: leftCount }, (_, i) => {
-                const t = leftCount === 1 ? 0.5 : i / (leftCount - 1);
-                return (2 * Math.PI / 3) + t * (2 * Math.PI / 3);
-            });
+                // Left side: angles from 120° to 240° (in radians: [2π/3, 4π/3])
+                const leftAngles = Array.from({ length: leftCount }, (_, i) => {
+                    const t = leftCount === 1 ? 0.5 : i / (leftCount - 1);
+                    return (2 * Math.PI / 3) + t * (2 * Math.PI / 3);
+                });
 
-            const angles = [...rightAngles, ...leftAngles];
+                angles = [...rightAngles, ...leftAngles];
+            }
 
             items.forEach((item, index) => {
                 const angle = angles[index] ?? 0;
@@ -334,8 +347,9 @@ export default function Home() {
     const pageComponents: Record<string, React.ComponentType> = {
         'about': AboutPage,
         'projects': ProjectsPage,
-        'contact': ContactPage,
-        'socials': SocialsPage,
+        'interests': MyInterestsPage,
+        // 'contact': ContactPage,
+        // 'socials': SocialsPage,
     };
 
     return (
