@@ -96,15 +96,15 @@ export default function AboutPage() {
             aspectRatio="10/9"
           />
           <ImageWithCaption
-            src="/app/assets/ab-ch-1.1.jpeg"
-            alt="With Zach King"
-            caption="With Zach King during the mentorship"
+            src="/app/assets/ab-ch-1.2.jpg"
+            alt="Editing video"
+            caption="A project after a year of learning Photoshop"
             aspectRatio="10/9"
           />
           <ImageWithCaption
-            src="/app/assets/ab-ch-1.2.jpg"
-            alt="Editing video"
-            caption="First projects using Photoshop"
+            src="/app/assets/ab-ch-1.1.jpeg"
+            alt="With Zach King"
+            caption="Call with Zach King during the mentorship"
             aspectRatio="10/9"
           />
         </div>
@@ -127,12 +127,6 @@ export default function AboutPage() {
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
           Ever since then, I've been building software products and always looking for the perfect mix between tech and creativity.
         </p>
-        
-        <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-4 my-6 rounded-r">
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-0">
-            <strong className="text-blue-700 dark:text-blue-300">💡 "I'm in" philosophy</strong>
-          </p>
-        </div>
       </div>
     </div>
   );
