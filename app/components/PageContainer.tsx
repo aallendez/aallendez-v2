@@ -47,15 +47,15 @@ export default function PageContainer({ children, isActive, onBack, title, intro
         transform: isActive ? undefined : 'translateX(100%)',
       }}
     >
-      {/* Back Button - Center Left */}
+      {/* Back Button - Top Left on Mobile, Center Left on Desktop */}
       {isActive && (
         <button
           onClick={onBack}
-          className="fixed left-8 top-1/2 -translate-y-1/2 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur shadow-lg border border-black/5 dark:border-white/5 hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 group"
+          className="fixed left-4 top-4 md:left-8 md:top-1/2 md:-translate-y-1/2 z-30 flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur shadow-lg border border-black/5 dark:border-white/5 hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 group"
           aria-label="Go back"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-900 dark:text-gray-100 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-medium text-gray-900 dark:text-gray-100">Back</span>
+          <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-900 dark:text-gray-100 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-xs md:text-sm font-medium text-gray-900 dark:text-gray-100">Back</span>
         </button>
       )}
 

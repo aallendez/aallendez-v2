@@ -15,6 +15,7 @@ export default function Home() {
     const root = useRef<HTMLDivElement>(null);
     const profileContainerRef = useRef<HTMLDivElement>(null);
     const homePageRef = useRef<HTMLDivElement>(null);
+    const mobileMenuRef = useRef<HTMLDivElement>(null);
     const scope = useRef<Scope | null>(null);
     const cleanupRef = useRef<(() => void) | null>(null);
     const hasNavigatedRef = useRef(false);
@@ -192,10 +193,66 @@ export default function Home() {
     
       }, []);
 
-    // Animate radial menu open/close on state change
+    // Set initial hidden state for mobile menu items on mount
+    useEffect(() => {
+        const mobileMenuContainer = mobileMenuRef.current;
+        if (!mobileMenuContainer) return;
+
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        if (!isMobile) return;
+
+        const items = Array.from(mobileMenuContainer.querySelectorAll('.mobile-menu-item')) as HTMLElement[];
+        items.forEach((item) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(-20px) scale(0.9)';
+        });
+    }, []);
+
+    // Animate mobile menu items vertically when menuOpen changes
+    useEffect(() => {
+        const mobileMenuContainer = mobileMenuRef.current;
+        if (!mobileMenuContainer) return;
+
+        // Only run animations on mobile (below md breakpoint)
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        if (!isMobile) return;
+
+        const items = Array.from(mobileMenuContainer.querySelectorAll('.mobile-menu-item')) as HTMLElement[];
+        if (items.length === 0) return;
+
+        if (menuOpen) {
+            items.forEach((item, index) => {
+                animate(item, {
+                    y: [-20, 0],
+                    opacity: [0, 1],
+                    scale: [0.9, 1],
+                    ease: 'out(3)',
+                    duration: 400,
+                    delay: index * 80,
+                });
+            });
+        } else {
+            items.forEach((item, index) => {
+                animate(item, {
+                    y: [0, -20],
+                    opacity: [1, 0],
+                    scale: [1, 0.9],
+                    ease: 'in(3)',
+                    duration: 300,
+                    delay: index * 40,
+                });
+            });
+        }
+    }, [menuOpen]);
+
+    // Animate radial menu open/close on state change (desktop only)
     useEffect(() => {
         const container = profileContainerRef.current;
         if (!container) return;
+
+        // Only run animations on desktop (md and up)
+        const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+        if (!isDesktop) return;
 
         const items = Array.from(container.querySelectorAll('.radial-item')) as HTMLElement[];
         if (items.length === 0) return;
@@ -371,8 +428,8 @@ export default function Home() {
                         </div>
 
                         <div ref={profileContainerRef} className="relative w-48 h-48 mx-auto">
-                            {/* Radial menu items (initially centered; animated outward) */}
-                            <div className="pointer-events-none absolute inset-0">
+                            {/* Radial menu items (Desktop only - initially centered; animated outward) */}
+                            <div className="hidden md:block pointer-events-none absolute inset-0">
                                 <div className="relative w-full h-full">
                                     {menuItems.map((item, index) => (
                                         <button
@@ -395,6 +452,23 @@ export default function Home() {
                                 alt="Profile Picture"
                                 className="w-48 h-48 rounded-full mx-auto shadow-lg object-cover pfp-hover-scale profilePic logo relative z-10"
                             />
+                        </div>
+
+                        {/* Mobile menu items - Vertical stack (appears on click) */}
+                        <div ref={mobileMenuRef} className={`md:hidden flex flex-col items-center gap-3 mt-6 w-full px-4 overflow-hidden ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+                            {menuItems.map((item) => (
+                                <button
+                                    key={item.key}
+                                    className="mobile-menu-item w-full max-w-xs cursor-pointer hover:shadow-md transition-all duration-300 rounded-full bg-blue-100/80 dark:bg-gray-600/80 backdrop-blur p-4 text-sm font-medium text-gray-900 dark:text-gray-100 shadow-sm border border-black/5 dark:border-white/5 hover:bg-blue-200/80 dark:hover:bg-gray-500/80 active:scale-95"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleMenuItemClick(item.key);
+                                    }}
+                                    aria-label={item.label}
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
                         </div>
 
                         {/* Name & Bio */}
