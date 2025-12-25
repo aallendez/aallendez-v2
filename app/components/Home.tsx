@@ -22,66 +22,6 @@ export default function Home() {
     const [ rotations, setRotations ] = useState(0);
     const [ menuOpen, setMenuOpen ] = useState(false);
     const [ activePage, setActivePage ] = useState<string | null>(null);
-    
-    
-    // useEffect(() => {
-    //     scope.current = anime.createScope({ root }).add(self => {
-    //         // Social media links animation on scroll
-    //         anime({
-    //             targets: '.social-link',
-    //             scale: [0, 1],
-    //             opacity: [0, 1],
-    //             translateY: ['2rem', 0],
-    //             easing: 'easeOutQuart',
-    //             duration: 800,
-    //             delay: (el, i) => i * 150,
-    //             autoplay: anime.onScroll({
-    //                 container: '.scroll-container',
-    //                 enter: 'bottom-=100 top',
-    //                 leave: 'top+=100 bottom',
-    //                 sync: true,
-    //             })
-    //         });
-
-    //         // Profile picture animation on scroll
-    //         anime({
-    //             targets: '.profile-picture',
-    //             scale: [0.8, 1],
-    //             opacity: [0, 1],
-    //             translateY: ['-2rem', 0],
-    //             easing: 'easeOutQuart',
-    //             duration: 1000,
-    //             autoplay: anime.onScroll({
-    //                 container: '.scroll-container',
-    //                 enter: 'bottom-=50 top',
-    //                 leave: 'top+=60 bottom',
-    //                 sync: true,
-    //             })
-    //         });
-
-    //         // Name and bio animation on scroll
-    //         anime({
-    //             targets: '.name-bio',
-    //             opacity: [0, 1],
-    //             translateY: ['1rem', 0],
-    //             easing: 'easeOutQuart',
-    //             duration: 800,
-    //             delay: 300,
-    //             autoplay: anime.onScroll({
-    //                 container: '.scroll-container',
-    //                 enter: 'bottom-=50 top',
-    //                 leave: 'top+=60 bottom',
-    //                 sync: true,
-    //             })
-    //         });
-    //     });
-
-    //     return () => {
-    //         if (scope.current) {
-    //             scope.current.revert();
-    //         }
-    //     };
-    // }, []);
 
     useEffect(() => {
         scope.current = createScope({ root }).add( self => {
@@ -414,7 +354,7 @@ export default function Home() {
             {/* Home Page */}
             <div 
                 ref={homePageRef}
-                className="absolute inset-0 w-full h-full flex items-center justify-center px-4 overflow-y-auto"
+                className="absolute z-[99999] inset-0 w-full h-full flex items-center justify-center px-4 overflow-y-auto"
             >
                 <div className="fixed text-center mx-auto z-10">
                     {/* Profile Picture */}

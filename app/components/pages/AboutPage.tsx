@@ -169,7 +169,7 @@ export default function AboutPage() {
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
           I'm studying a BSc in Computer Science & Artificial Intelligence 
           at <a href="https://ie.edu" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">IE University</a>.
-          At IE, I'm partnerships ambassador at IE Tech & Innovation. We organize events with people from the tech world. I'm also president and co-founder of the IE Swimming Club.
+          At IE, I'm partnerships ambassador at IE Tech & Innovation. We organize events with tech companies and interesting people from the space. I'm also president and co-founder of the IE Swimming Club.
         </p>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
           I'm also working

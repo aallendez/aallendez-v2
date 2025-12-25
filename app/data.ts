@@ -87,7 +87,7 @@ export const menuItems: MenuItem[] = [
     { key: 'projects', label: '🛠️ Projects' },
     { key: 'about', label: '🎸 About me' },
     // { key: 'contact', label: 'Contact' },
-    { key: 'interests', label: '🏊‍♂️ Interests' },
+    { key: 'interests', label: '🤷‍♂️ Random' },
     // { key: 'socials', label: 'Socials' },
 ];
 

@@ -6,27 +6,9 @@ export default function MyInterestsPage() {
       <div className="prose prose-lg dark:prose-invert max-w-none">
         {/* Interests Section */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Interests</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Principles</h2>
           <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
-          <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-            <li>Real Madrid</li>
-            <li>Guitar (album)</li>
-            <li>
-              Tech
-              <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
-                <li>Insights on tech</li>
-                <li>
-                  Early adopter??
-                  <ul className="list-disc list-inside ml-6 mt-1 space-y-1">
-                    <li>ChatGPT</li>
-                    <li>Cursor</li>
-                    <li>Revolut</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li>Countryside - fire - steak</li>
-          </ul>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4"></h3>
         </section>
 
         {/* Interesting Reads and Watches Section */}
@@ -39,7 +21,7 @@ export default function MyInterestsPage() {
             <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">📚 Books</h3>
             <ul className="space-y-4">
               <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">$100M Offers:</span> a book that has taught me more about business than any course in university
+                <span className="font-semibold">$100M Offers:</span> a book that has taught me more about selling and business than any course in university
               </li>
               <li className="text-gray-700 dark:text-gray-300">
                 <span className="font-semibold">Psychology of Money:</span> people are emotional and act accordingly, understand it and use it to your advantage.
@@ -68,7 +50,7 @@ export default function MyInterestsPage() {
                 <span className="font-semibold">The Secret Life of Walter Mitty:</span> a reminder to escape autopilot, take intentional risks, and design a life you actually want to live.
               </li>
               <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">Good Will Hunting:</span> contains the best ever monologue in cinema history (biased).
+                <span className="font-semibold">Good Will Hunting:</span> contains the best ever monologue in cinema history (biased 😂).
               </li>
             </ul>
           </div>
