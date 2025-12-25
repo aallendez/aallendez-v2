@@ -1,5 +1,11 @@
 import { homeData } from "~/data";
 import ImageWithCaption from "~/components/ImageWithCaption";
+import abCh10 from "~/assets/ab-ch-1.0.jpeg";
+import abCh11 from "~/assets/ab-ch-1.1.jpeg";
+import abCh12 from "~/assets/ab-ch-1.2.JPG";
+import abCh20 from "~/assets/ab-ch-2.0.png";
+import abCh21 from "~/assets/ab-ch-2.1.PNG";
+import abCh22 from "~/assets/ab-ch-2.2.jpg";
 
 export default function AboutPage() {
   // Calculate age based on exact birthday: October 5, 2004
@@ -94,19 +100,19 @@ export default function AboutPage() {
         </p>
         <div className="flex justify-center my-4 gap-4">
           <ImageWithCaption
-            src="/app/assets/ab-ch-1.0.jpeg"
+            src={abCh10}
             alt="Editing video"
             caption="Me editing a video at 13 years old"
             aspectRatio="10/9"
           />
           <ImageWithCaption
-            src="/app/assets/ab-ch-1.2.jpg"
+            src={abCh12}
             alt="Editing video"
             caption="A project after a year of learning Photoshop"
             aspectRatio="10/9"
           />
           <ImageWithCaption
-            src="/app/assets/ab-ch-1.1.jpeg"
+            src={abCh11}
             alt="With Zach King"
             caption="Call with Zach King during the mentorship"
             aspectRatio="10/9"
@@ -133,19 +139,19 @@ export default function AboutPage() {
         </p>
         <div className="flex justify-center my-4 gap-4">
           <ImageWithCaption
-            src="/app/assets/ab-ch-2.0.png"
+            src={abCh20}
             alt="Editing video"
             caption="LaRocket website with it's core products"
             aspectRatio="10/9"
           />
           <ImageWithCaption
-            src="/app/assets/ab-ch-2.1.png"
+            src={abCh21}
             alt="Editing video"
             caption="1st beta version of Pledge"
             aspectRatio="10/9"
           />
           <ImageWithCaption
-            src="/app/assets/ab-ch-2.2.jpg"
+            src={abCh22}
             alt="With Zach King"
             caption="Pledge beta launch event"
             aspectRatio="10/9"

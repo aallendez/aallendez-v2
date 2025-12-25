@@ -1,4 +1,15 @@
 import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
+import juan2 from "~/assets/juan-2.png";
+import mantis from "~/assets/mantis.png";
+import zeffo from "~/assets/zeffo.png";
+import montecarlo from "~/assets/montecarlo.png";
+import holonote from "~/assets/holonote.png";
+import ico from "~/assets/ico.png";
+import spoticircle from "~/assets/spoticircle.png";
+import stonks from "~/assets/stonks.png";
+import crickleCreek from "~/assets/crickleCreek.png";
+import euro2024 from "~/assets/euro2024.jpeg";
+import chatbotLarocket from "~/assets/chatbot_larocket.png";
 
 
 export interface SocialLink {
@@ -47,7 +58,7 @@ export interface PageIntroduction {
 export const homeData: HomeData = {
   name: "Juan Alonso-Allende",
   bio: "Software & Product Engineer",
-  profilePicture: "/app/assets/juan-2.png",
+  profilePicture: juan2,
   location: "Madrid, Spain",
   status: "",
   socialLinks: [
@@ -115,7 +126,7 @@ export const projects: Project[] = [
     {
         title: 'Zeffo AI',
         date: '2025',
-        image: '/app/assets/zeffo.png',
+        image: zeffo,
         description: 'Multi-cloud, AI-powered ticket resolution platform to keep company docs up to date and improve based metrics and A/B experiment tracking.',
         stack: ['TypeScript', 'Firebase', 'Python', 'Langchain / Langgraph', 'SQL', 'ChromaDB', 'Fast-API', 'Docker', 'Terraform', 'AWS', 'Azure', 'Grafana', 'Prometheus'],
         urls: {
@@ -129,7 +140,7 @@ export const projects: Project[] = [
     {
         title: 'GPU Monte Carlo Simulations',
         date: '2025',
-        image: '/app/assets/montecarlo.png',
+        image: montecarlo,
         description: 'Hybrid C/CUDA Monte Carlo engine for systemic crash probability estimation across correlated EU equity indices.',
         stack: ['C', 'CUDA', 'MPI', 'OpenMP', 'Slurm', 'Linux'],
         urls: {
@@ -141,7 +152,7 @@ export const projects: Project[] = [
     {
         title: 'Holonote',
         date: '2025',
-        image: '/app/assets/holonote.png',
+        image: holonote,
         description: 'Production ready note-taking and organization platform. Whoop but for wellbeing.',
         stack: ['TypeScript', 'Firebase', 'Fast-API', 'SQL', 'Docker', 'Terraform', 'AWS', 'Grafana', 'Prometheus'],
         url: 'https://github.com/aallendez/holonote',
@@ -151,7 +162,7 @@ export const projects: Project[] = [
     {
         title: 'Mantis Malware Classifier',
         date: '2025',
-        image: '/app/assets/ico.png',
+        image: mantis,
         description: 'Enterprise ML framework for tabular classification with automated hyperparameter tuning, LIME interpretability, and CI/CD.',
         stack: ['Python', 'Pytorch', 'Pandas', 'Scikit-Learn', 'Docker'],
         urls: {
@@ -164,7 +175,7 @@ export const projects: Project[] = [
     {
         title: 'Spoticircle',
         date: '2025',
-        image: '/app/assets/spoticircle.png',
+        image: spoticircle,
         description: 'Spotifcircle transforms spotify data into constelations. Private due to API limitations.',
         stack: ['TypeScript', 'Spotify API'],
         url: 'https://spoticircle.xyz',
@@ -174,7 +185,7 @@ export const projects: Project[] = [
     {
         title: 'Stonks App',
         date: '2024',
-        image: '/app/assets/stonks.png',
+        image: stonks,
         description: 'Financial tracker',
         stack: ['Python', 'Fast-API', 'SQL', 'Docker', 'Azure'],
         urls: {
@@ -186,7 +197,7 @@ export const projects: Project[] = [
     {
         title: 'Coffee Subscription Flow',
         date: '2024',
-        image: '/app/assets/crickleCreek.png',
+        image: crickleCreek,
         description: 'Coffee subscription flow for a coffee shop. +$1k in sales in first months.',
         stack: ['TypeScript', 'graphQL', 'Shopify'],
         url: 'https://www.cricklecreekcoffee.com/pages/subscription',
@@ -196,7 +207,7 @@ export const projects: Project[] = [
     {
         title: 'ML Model',
         date: '2024',
-        image: '/app/assets/euro2024.jpeg',
+        image: euro2024,
         description: 'The day before the Euro 2024 final, I made a model to predict the outcome of the game between Spain and England based on tournament performance.',
         stack: ['Python', 'Pandas', 'Scikit-Learn'],
         urls: {
@@ -208,7 +219,7 @@ export const projects: Project[] = [
     {
         title: 'LaRocket Support Chatbot',
         date: '2024',
-        image: '/app/assets/chatbot_larocket.png',
+        image: chatbotLarocket,
         description: 'AI chatbot application for customer support.',
         stack: ['JavaScript', 'Python', 'Langchain / Langgraph', 'MongoDB'],
         url: 'https://github.com/aallendez/larocket-chatbot',
