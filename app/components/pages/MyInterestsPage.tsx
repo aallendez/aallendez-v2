@@ -19,7 +19,7 @@ export default function MyInterestsPage() {
               <b>The 1% rule:</b> Plan in decades. Think in years. Work in months. Live in days. 
             </li>
             <li className="text-gray-700 dark:text-gray-300">
-              <b>Try, fail, try again:</b> Reading helps. Building teaches.
+              <b>Try, fail, try again:</b> Reading helps. Doing teaches.
             </li>
             <li className="text-gray-700 dark:text-gray-300">
               <b>Feedback and iteration:</b> I pay attention to detail, but value feedback and iteration more.

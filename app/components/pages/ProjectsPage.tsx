@@ -106,6 +106,7 @@ export default function ProjectsPage() {
       
       // AI, ML & Big Data
       'Langchain / Langgraph': SiLangchain,
+      'Langchain': SiLangchain,
       'ChromaDB': FaDatabase,
       'Pytorch': SiPytorch,
       'Apache Spark': SiApachespark,
@@ -118,7 +119,11 @@ export default function ProjectsPage() {
       'MPI': DiCode,
       'OpenMP': SiOpensourceinitiative,
       'Shopify API': FaShopify,
+      'Shopify': FaShopify,
       'Spotify API': FaSpotify,
+      'Git': FaGithub,
+      'Github': FaGithub,
+      'Github Actions': FaGithub,
     };
     
     return iconMap[tech] || DiCode; // Fallback to generic code icon
@@ -130,7 +135,7 @@ export default function ProjectsPage() {
     apis: ['REST', 'graphQL', 'gRPC'],
     infra: ['Terraform', 'AWS', 'Azure', 'Grafana', 'Prometheus', 'Linux', 'Docker', 'K9s'],
     aiMlBigData: ['Langchain / Langgraph', 'ChromaDB', 'Pytorch', 'Apache Spark', 'Pandas', 'Scikit-Learn'],
-    other: ['CUDA', 'Slurm', 'MPI', 'OpenMP']
+    other: ['CUDA', 'Slurm', 'MPI', 'OpenMP', 'Github Actions']
   };
 
   // Helper function to get icon for link type
