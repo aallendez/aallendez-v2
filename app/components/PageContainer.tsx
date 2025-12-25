@@ -60,7 +60,7 @@ export default function PageContainer({ children, isActive, onBack, title, intro
       )}
 
       {/* Page Content */}
-      <div className="max-w-6xl mx-auto h-full overflow-y-auto">
+      <div className="max-w-6xl mx-auto h-full overflow-y-auto pb-24">
         {title && (
           <div className="pt-20 pb-8 px-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
