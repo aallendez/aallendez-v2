@@ -98,7 +98,7 @@ export default function AboutPage() {
            on how to think creatively in a structured way. 
            That mindset ended up being very useful far beyond video.
         </p>
-        <div className="flex justify-center my-4 gap-4">
+        <div className="flex lg:flex-row flex-col justify-center lg:px-0 px-10 my-4 gap-4">
           <ImageWithCaption
             src={abCh10}
             alt="Editing video"
@@ -137,7 +137,7 @@ export default function AboutPage() {
            It didn’t work out but it taught me more than any win could have. I learned a lot about what it takes, 
            and building the tech infrastructure for the business is what ultimately led me to <b>software engineering</b>.
         </p>
-        <div className="flex justify-center my-4 gap-4">
+        <div className="flex lg:flex-row flex-col justify-center lg:px-0 px-10 my-4 gap-4">
           <ImageWithCaption
             src={abCh20}
             alt="Editing video"
