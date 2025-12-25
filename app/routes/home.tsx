@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 export const meta: Route.MetaFunction = () => {
   return [
     { title: "Juan" },
-    { name: "description", content: "Hi, I'm Juan." },
+    { name: "description", content: "I'd check this website out if I were you 😜." },
   ];
 };
 
