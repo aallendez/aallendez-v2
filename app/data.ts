@@ -116,7 +116,7 @@ export const pageIntroductions: Record<string, PageIntroduction> = {
         text: 'Connect with me on these platforms to stay updated on my latest work and thoughts.'
     },
     'interests': {
-        text: 'In this page you can find things I\'m passionate about, what inspires me, and what keeps me curious.'
+        text: 'The name of this page is pretty much self-explanatory. Here are some things I\'m passionate about, what inspires me, and what keeps me curious.'
     },
 };
 

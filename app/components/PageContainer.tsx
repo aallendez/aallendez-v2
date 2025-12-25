@@ -66,7 +66,7 @@ export default function PageContainer({ children, isActive, onBack, title, intro
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
             <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
             {introduction && (
-              <Callout content={introduction} italic={title === "About me"} />
+              <Callout content={introduction} italic={title === "🎸 About me"} />
             )}
           </div>
         )}

@@ -8,7 +8,30 @@ export default function MyInterestsPage() {
         <section>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Principles</h2>
           <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4"></h3>
+          <ol className="list-decimal list-inside space-y-4">
+            <li className="text-gray-700 dark:text-gray-300">
+              <b>Curiosity:</b> You never know what you don't know. Trying new things is the only way to grow.
+            </li>
+            <li className="text-gray-700 dark:text-gray-300">
+              <b>Storytelling:</b> Whatever I do (apps, projects, anything) I try to wrap it in a compelling narrative. That's what makes people care.
+            </li>
+            <li className="text-gray-700 dark:text-gray-300">
+              <b>The 1% rule:</b> Plan in decades. Think in years. Work in months. Live in days. 
+            </li>
+            <li className="text-gray-700 dark:text-gray-300">
+              <b>Try, fail, try again:</b> Reading helps. Building teaches.
+            </li>
+            <li className="text-gray-700 dark:text-gray-300">
+              <b>Feedback and iteration:</b> I pay attention to detail, but value feedback and iteration more.
+              <br />
+              <div className="ml-4">
+                <Callout 
+                  content="If you are not embarrassed by the first version of your product, you've launched too late. - Reid Hoffman" 
+                  italic={true} 
+                />
+              </div>
+            </li>
+          </ol>
         </section>
 
         {/* Interesting Reads and Watches Section */}
@@ -33,7 +56,7 @@ export default function MyInterestsPage() {
                 <span className="font-semibold">Zero to One:</span> ignore competition, focus on your problem.
               </li>
               <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">NLP (Neuro Linguistic Programming):</span> words have the power to rewire your brain and others too.
+                <span className="font-semibold">NLP (Neuro Linguistic Programming):</span> words have the power to rewire a person's mind and behavior.
               </li>
             </ul>
           </div>
@@ -57,7 +80,7 @@ export default function MyInterestsPage() {
         </section>
 
         {/* Cool People */}
-        <section className="mt-12">
+        {/* <section className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Cool People</h2>
           <div className="h-[1px] w-full my-4 bg-gray-200 dark:bg-gray-600" />
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
@@ -66,7 +89,7 @@ export default function MyInterestsPage() {
             <li>Rafael Nadal</li>
             <li>Cristiano Ronaldo (duh, but true)</li>
           </ul>
-        </section>
+        </section> */}
       </div>
     </div>
   );
