@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import ico from "~/assets/juan-2.png";
+import { Analytics } from "@vercel/analytics/react"
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/png", href: ico },
@@ -54,6 +55,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <Analytics />
       </body>
     </html>
   );
