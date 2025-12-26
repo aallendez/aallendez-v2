@@ -104,7 +104,7 @@ export const menuItems: MenuItem[] = [
 
 export const pageIntroductions: Record<string, PageIntroduction> = {
     'about': {
-        text: 'Be curious, not judgmental. - Ted Lasso'
+        text: '"Be curious, not judgmental." - Ted Lasso'
     },
     'projects': {
         text: 'It all started with legos 🏗️ ... I\'ve always loved to build things. These are some of the things I\'ve worked on since I discovered software engineering.'

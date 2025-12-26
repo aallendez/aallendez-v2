@@ -26,7 +26,7 @@ export default function MyInterestsPage() {
               <br />
               <div className="ml-4">
                 <Callout 
-                  content="If you are not embarrassed by the first version of your product, you've launched too late. - Reid Hoffman" 
+                  content="&quot;If you are not embarrassed by the first version of your product, you've launched too late.&quot; - Reid Hoffman" 
                   italic={true} 
                 />
               </div>

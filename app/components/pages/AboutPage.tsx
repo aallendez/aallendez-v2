@@ -29,7 +29,7 @@ export default function AboutPage() {
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-12 -mt-4">
-        Making conclusions too early is a very easy way to stop learning. I've found curiosity takes you further.
+        Making conclusions too early is a very easy way to stop growing. I've found curiosity takes you further.
       </p>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -45,7 +45,7 @@ export default function AboutPage() {
           </p>
 
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            I love building software products 💻. I'm currently building a cool
+            I love building software products. I'm currently building a cool
             one @{" "}
             <a
               href="https://kiboventures.com"
@@ -77,7 +77,7 @@ export default function AboutPage() {
           </p>
 
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            I like challenging myself and doing endurance sports 🏊‍♂️. Next up:
+            I like challenging myself and doing endurance sports. 🏃‍♂️ Next up:
             my 3rd half marathon in April 2026.
           </p>
         </div>
@@ -301,7 +301,7 @@ export default function AboutPage() {
         </p>
 
         <Callout 
-          content="Anyway... that's me. At least for now :)"
+          content="Anyway... that's me. At least for now 🚀"
         />
       </div>
     </div>
